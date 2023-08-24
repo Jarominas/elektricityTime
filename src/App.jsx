@@ -1,19 +1,17 @@
 // import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.scss'
+import './app.scss'
 import { Container } from 'react-bootstrap'
 import Navigation from './components/Navigation/Navigation'
-import Header from './components/Header/Header'
-import Chart from './components/Chart/Chart'
-import Days from './components/Footer/Days'
+import Body from './components/Body/Body'
+import Footer from './components/Footer'
 
 function App() {
       return (
             <>
                   <Container>
                         <Navigation />
-                        <Header />
-                        <Chart />
-                        <Days />
+                        <Body />
+                        <Footer />
                   </Container>
             </>
       )

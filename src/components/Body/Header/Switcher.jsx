@@ -1,29 +1,27 @@
-import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import { ELE, GAS } from '../constants'
 
-const elek = 'elektricity'
-const gas = 'gaas'
-const Switcher = () => {
-      const [activeButton, setActiveButton] = useState(elek)
-
+const Switcher = ({ activeEnergy, setActiveEnergy }) => {
       return (
             <div>
                   {' '}
                   <ButtonGroup>
                         <Button
+                              className='text-capitalize'
                               variant='outline-secondary'
-                              onClick={() => setActiveButton(elek)}
-                              active={activeButton === elek}
+                              onClick={() => setActiveEnergy(ELE)}
+                              active={activeEnergy === ELE}
                         >
-                              Elektricity
+                              {ELE}
                         </Button>
                         <Button
+                              className='text-capitalize'
                               variant='outline-secondary'
-                              onClick={() => setActiveButton(gas)}
-                              active={activeButton === gas}
+                              onClick={() => setActiveEnergy(GAS)}
+                              active={activeEnergy === GAS}
                         >
-                              Gaas
+                              {GAS}
                         </Button>
                   </ButtonGroup>
             </div>

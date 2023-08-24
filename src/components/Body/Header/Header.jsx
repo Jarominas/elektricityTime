@@ -5,18 +5,18 @@ import PriceInfo from './PriceInfo'
 import Switcher from './Switcher'
 import Price from './Price'
 
-const Header = () => {
+const Header = (props) => {
       return (
             <Container>
                   <Row>
                         <Col className='d-flex flex-column align-items-start'>
-                              <PriceInfo />
+                              <PriceInfo {...props} />
                         </Col>
                         <Col className='d-flex align-items-center justify-content-center'>
-                              <Switcher />
+                              <Switcher {...props} />
                         </Col>
                         <Col className='d-flex flex-column align-items-end'>
-                              <Price />
+                              <Price {...props} />
                         </Col>
                   </Row>
             </Container>

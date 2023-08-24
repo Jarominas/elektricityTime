@@ -1,58 +1,66 @@
 import { useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 
 const days = [
       {
-            name: '1 Day',
+            label: '1 Day',
       },
       {
-            name: '2 Day',
+            label: '2 Day',
       },
       {
-            name: '3 Day',
+            label: '3 Day',
       },
       {
-            name: '4 Day',
+            label: '4 Day',
       },
       {
-            name: '5 Day',
+            label: '5 Day',
       },
       {
-            name: '6 Day',
+            label: '6 Day',
       },
       {
-            name: '7 Day',
+            label: '7 Day',
       },
       {
-            name: '8 Day',
+            label: '8 Day',
       },
 ]
-const Days = () => {
-      const [buttonActive, isButtonActive] = useState(false)
+const Days = ({ setShowSideBar }) => {
+      const [buttonActive, isButtonActive] = useState(0)
 
-      const handleActive = (id) => {
+      const handlerActive = (id) => {
             isButtonActive(id)
       }
       return (
             <>
-                  <div className='button-array d-flex justify-content-center gap-2 '>
+                  <Container className='d-flex align-items-center justify-content-center'>
                         {days.map((day, id) => {
                               return (
                                     <Button
+                                          key={id}
+                                          className='mx-2'
                                           variant='outline-warning'
-                                          onClick={() => handleActive(id)}
+                                          onClick={() => handlerActive(id)}
                                           active={
                                                 buttonActive === id
                                                       ? true
                                                       : false
                                           }
-                                          key={id}
                                     >
-                                          {day.name}
+                                          {day.label}
                                     </Button>
                               )
                         })}
-                  </div>
+                        <Button
+                              className='mx-2'
+                              variant='outline-warning'
+                              onClick={() => setShowSideBar(true)}
+                        >
+                              Choose Date
+                        </Button>
+                  </Container>
             </>
       )
 }

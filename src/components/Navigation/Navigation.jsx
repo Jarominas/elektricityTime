@@ -1,5 +1,5 @@
 import { Navbar, Container } from 'react-bootstrap'
-import logo from '/public/logo.svg'
+import logo from '/src/logo.svg'
 
 const Navigation = () => {
       return (
