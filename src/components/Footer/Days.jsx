@@ -1,55 +1,28 @@
 import { useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
+import { DAYS } from '../Body/constants'
 
-const days = [
-      {
-            label: '1 Day',
-      },
-      {
-            label: '2 Day',
-      },
-      {
-            label: '3 Day',
-      },
-      {
-            label: '4 Day',
-      },
-      {
-            label: '5 Day',
-      },
-      {
-            label: '6 Day',
-      },
-      {
-            label: '7 Day',
-      },
-      {
-            label: '8 Day',
-      },
-]
-const Days = ({ setShowSideBar }) => {
-      const [buttonActive, isButtonActive] = useState(0)
-
-      const handlerActive = (id) => {
-            isButtonActive(id)
-      }
+const Days = ({ setShowSideBar, selectedDay, setSelectedDay }) => {
+      // const handlerActive = (id) => {
+      //       setSelectedDay(id)
+      // }
       return (
             <>
                   <Container className='d-flex align-items-center justify-content-center'>
-                        {days.map((day, id) => {
+                        {DAYS.map(({ label, value }) => {
                               return (
                                     <Button
-                                          key={id}
+                                          key={label}
                                           className='mx-2'
                                           variant='outline-warning'
-                                          onClick={() => handlerActive(id)}
+                                          onClick={() => setSelectedDay(value)}
                                           active={
-                                                buttonActive === id
+                                                selectedDay === value
                                                       ? true
                                                       : false
                                           }
                                     >
-                                          {day.label}
+                                          {label}
                                     </Button>
                               )
                         })}

@@ -1,8 +1,8 @@
-import { Row, Container, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import { priceData } from './priceData'
 
-const PriceTable = () => {
+const PriceTable = ({ electricityPrice }) => {
       return (
             <Container className='priceTable'>
                   <Table striped bordered hover size='sm'>

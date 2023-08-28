@@ -54,7 +54,7 @@ const data = [
       },
 ]
 
-const Chart = () => {
+const Chart = ({ electricityPrice }) => {
       return (
             <div className='chartContainer'>
                   <ResponsiveContainer width='100%' height='100%'>
