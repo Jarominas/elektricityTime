@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import Header from './Header/Header'
 import Chart from './Chart/Chart'
-
+import ModalError from './ModalError/ModalError'
 import { ELE } from './constants'
-import './body.scss'
 import PriceTable from './PriceTable/PriceTable'
 import { getElectricityPrice, getGasPrice } from '../../services/apiServe'
+import './body.scss'
 
 const Body = ({ selectedDay }) => {
       const [activeEnergy, setActiveEnergy] = useState(ELE)
@@ -14,16 +14,28 @@ const Body = ({ selectedDay }) => {
       const [activePriceTable, setActivePriceTable] = useState(false)
       const [electricityPrice, setElectricityPrice] = useState(null)
       const [gasPrice, setGasPrice] = useState(null)
+      const [errorMessage, setErrorMessage] = useState(null)
 
       useEffect(() => {
-            getElectricityPrice(selectedDay).then((data) => {
-                  console.log('electricity', data)
-                  setElectricityPrice(data.data)
-            })
-            getGasPrice(selectedDay).then((data) => {
-                  console.log('gas', data)
-                  setGasPrice(data.data)
-            })
+            getElectricityPrice(selectedDay)
+                  .then((data) => {
+                        console.log('electricity', data)
+                        if (!data.success) {
+                              throw data.messages
+                        }
+                        setElectricityPrice(data.data)
+                  })
+                  .catch(setErrorMessage)
+
+            getGasPrice(selectedDay)
+                  .then((data) => {
+                        console.log('gas', data)
+                        if (!data.success) {
+                              throw new Error(data.messages)
+                        }
+                        setGasPrice(data.data)
+                  })
+                  .catch(setErrorMessage)
       }, [selectedDay])
 
       const handleChart = () => {
@@ -35,7 +47,7 @@ const Body = ({ selectedDay }) => {
             setActivePriceTable(true)
             setActiveChart(false)
       }
-
+      console.log('error message', errorMessage)
       return (
             <>
                   <Header
@@ -71,6 +83,11 @@ const Body = ({ selectedDay }) => {
                   >
                         Price Table
                   </Button>
+
+                  <ModalError
+                        errorMessage={errorMessage}
+                        handleClose={() => setErrorMessage(null)}
+                  />
             </>
       )
 }
