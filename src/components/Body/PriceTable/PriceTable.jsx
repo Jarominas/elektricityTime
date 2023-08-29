@@ -3,9 +3,16 @@ import Table from 'react-bootstrap/Table'
 import moment from 'moment'
 
 const PriceTable = ({ electricityPrice }) => {
-      const { ee, fi, lv, lt } = electricityPrice
+      // const { ee, fi, lv, lt } = electricityPrice
+      const data = electricityPrice?.ee.map((priceEE, index) => {
+            return {
+                  ee: priceEE,
+                  lv: electricityPrice?.lv[index],
+                  fi: electricityPrice?.fi[index],
+                  lt: electricityPrice?.lt[index],
+            }
+      })
 
-      console.log(ee)
       return (
             <Container className='priceTable'>
                   <Table striped bordered hover size='sm'>
@@ -19,39 +26,19 @@ const PriceTable = ({ electricityPrice }) => {
                               </tr>
                         </thead>
                         <tbody>
-                              {ee.map((data, index) => (
+                              {data.map(({ ee, lt, lv, fi }, index) => (
                                     <tr key={index}>
                                           <td>
-                                                {
-                                                      (data.timestamp = moment
-                                                            .unix(
-                                                                  data.timestamp
-                                                            )
-                                                            .format(
-                                                                  'MM/DD/YYYY'
-                                                            ))
-                                                }
+                                                {moment
+                                                      .unix(ee.timestamp)
+                                                      .format(
+                                                            'DD.MM.YYYY HH:mm:ss'
+                                                      )}
                                           </td>
-                                          <td>
-                                                {ee[index]
-                                                      ? ee[index].price + ' €'
-                                                      : ''}
-                                          </td>
-                                          <td>
-                                                {lv[index]
-                                                      ? lv[index].price + ' €'
-                                                      : ''}
-                                          </td>
-                                          <td>
-                                                {lt[index]
-                                                      ? lt[index].price + ' €'
-                                                      : ''}
-                                          </td>
-                                          <td>
-                                                {fi[index]
-                                                      ? fi[index].price + ' €'
-                                                      : ''}
-                                          </td>
+                                          <td>{ee.price}</td>
+                                          <td>{fi.price}</td>
+                                          <td>{lv.price}</td>
+                                          <td>{lt.price}</td>
                                     </tr>
                               ))}
                         </tbody>
