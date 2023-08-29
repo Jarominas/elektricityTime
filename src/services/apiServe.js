@@ -15,7 +15,7 @@ export async function getElectricityPrice(selectedDay) {
       return await response.json()
 }
 export async function getGasPrice(selectedDay) {
-      const start = moment().subtract('10', 'hours').toISOString()
+      const start = moment().subtract('1', 'days').toISOString()
       const end = moment().add(selectedDay, 'days').toISOString()
 
       const params = new URLSearchParams({

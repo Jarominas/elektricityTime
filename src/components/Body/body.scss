@@ -1,6 +1,7 @@
 .chartContainer {
       margin-top: 2em;
       height: 500px;
+      margin-bottom: 1em;
 }
 .priceTable {
       display: flex;
@@ -8,6 +9,8 @@
       height: 500px;
       margin-top: 2em;
       text-align: right;
+      overflow-y: scroll;
+      margin-bottom: 1em;
       & .priceRow {
             display: flex;
             justify-content: center;
