@@ -50,44 +50,18 @@ const Body = ({ selectedDay }) => {
       console.log('error message', errorMessage)
       return (
             <>
-                  <Header
-                        activeEnergy={activeEnergy}
-                        setActiveEnergy={setActiveEnergy}
-                  />
-                  {activeChart && (
-                        <Chart
-                              activeEnergy={activeEnergy}
-                              electricityPrice={electricityPrice}
-                              gasPrice={gasPrice}
-                        />
-                  )}
-                  {activePriceTable && (
-                        <PriceTable
-                              electricityPrice={electricityPrice}
-                              gasPrice={gasPrice}
-                        />
-                  )}
+                  <Header activeEnergy={activeEnergy} setActiveEnergy={setActiveEnergy} electricityPrice={electricityPrice} />
+                  {activeChart && <Chart activeEnergy={activeEnergy} electricityPrice={electricityPrice} gasPrice={gasPrice} />}
+                  {activePriceTable && <PriceTable electricityPrice={electricityPrice} gasPrice={gasPrice} />}
 
-                  <Button
-                        className='mx-2'
-                        variant='outline-info'
-                        onClick={() => handleChart()}
-                        active={activeChart}
-                  >
+                  <Button className='mx-2' variant='outline-info' onClick={() => handleChart()} active={activeChart}>
                         Chart
                   </Button>
-                  <Button
-                        variant='outline-info'
-                        onClick={() => handlePriceTable()}
-                        active={activePriceTable}
-                  >
+                  <Button variant='outline-info' onClick={() => handlePriceTable()} active={activePriceTable}>
                         Price Table
                   </Button>
 
-                  <ModalError
-                        errorMessage={errorMessage}
-                        handleClose={() => setErrorMessage(null)}
-                  />
+                  <ModalError errorMessage={errorMessage} handleClose={() => setErrorMessage(null)} />
             </>
       )
 }

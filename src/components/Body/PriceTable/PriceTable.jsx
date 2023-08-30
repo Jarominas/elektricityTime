@@ -3,7 +3,6 @@ import Table from 'react-bootstrap/Table'
 import moment from 'moment'
 
 const PriceTable = ({ electricityPrice }) => {
-      // const { ee, fi, lv, lt } = electricityPrice
       const data = electricityPrice?.ee.map((priceEE, index) => {
             return {
                   ee: priceEE,
@@ -12,7 +11,9 @@ const PriceTable = ({ electricityPrice }) => {
                   lt: electricityPrice?.lt[index],
             }
       })
-
+      const now = moment().format('HH')
+      const rowIndex = data.findIndex(({ ee }) => moment.unix(ee.timestamp).format('HH') === now)
+      console.log(rowIndex)
       return (
             <Container className='priceTable'>
                   <Table striped bordered hover size='sm'>
@@ -28,17 +29,13 @@ const PriceTable = ({ electricityPrice }) => {
                         <tbody>
                               {data.map(({ ee, lt, lv, fi }, index) => (
                                     <tr key={index}>
-                                          <td>
-                                                {moment
-                                                      .unix(ee.timestamp)
-                                                      .format(
-                                                            'DD.MM.YYYY HH:mm:ss'
-                                                      )}
+                                          <td className={index === rowIndex ? 'active-row' : ''}>
+                                                {moment.unix(ee.timestamp).format('DD.MM.YYYY HH:mm:ss')}
                                           </td>
-                                          <td>{ee.price}</td>
-                                          <td>{fi.price}</td>
-                                          <td>{lv.price}</td>
-                                          <td>{lt.price}</td>
+                                          <td className={index === rowIndex ? 'active-row' : ''}>{ee.price}</td>
+                                          <td className={index === rowIndex ? 'active-row' : ''}>{fi.price}</td>
+                                          <td className={index === rowIndex ? 'active-row' : ''}>{lv.price}</td>
+                                          <td className={index === rowIndex ? 'active-row' : ''}>{lt.price}</td>
                                     </tr>
                               ))}
                         </tbody>

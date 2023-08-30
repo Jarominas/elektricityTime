@@ -1,14 +1,4 @@
-import {
-      LineChart,
-      ReferenceLine,
-      Line,
-      XAxis,
-      YAxis,
-      CartesianGrid,
-      Tooltip,
-      Legend,
-      ResponsiveContainer,
-} from 'recharts'
+import { LineChart, ReferenceLine, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import moment from 'moment'
 
 const Chart = ({ electricityPrice }) => {
@@ -35,18 +25,8 @@ const Chart = ({ electricityPrice }) => {
                               <YAxis />
                               <Tooltip />
                               <Legend />
-                              <Line
-                                    type='monotone'
-                                    dataKey='price'
-                                    stroke='#8884d8'
-                                    activeDot={{ r: 8 }}
-                              />
-                              <ReferenceLine
-                                    x={data?.findIndex(
-                                          ({ hour }) => hour === now
-                                    )}
-                                    stroke={'red'}
-                              />
+                              <Line type='monotone' dataKey='price' stroke='#8884d8' activeDot={{ r: 8 }} />
+                              <ReferenceLine x={data?.findIndex(({ hour }) => hour === now)} stroke={'red'} />
                         </LineChart>
                   </ResponsiveContainer>
             </div>
