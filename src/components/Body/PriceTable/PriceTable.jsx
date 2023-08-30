@@ -11,8 +11,8 @@ const PriceTable = ({ electricityPrice }) => {
                   lt: electricityPrice?.lt[index],
             }
       })
-      const now = moment().format('HH')
-      const rowIndex = data.findIndex(({ ee }) => moment.unix(ee.timestamp).format('HH') === now)
+      const now = moment().format('DD HH')
+      const rowIndex = data.findIndex(({ ee }) => moment.unix(ee.timestamp).format('DD HH') === now)
       console.log(rowIndex)
       return (
             <Container className='priceTable'>
@@ -28,14 +28,12 @@ const PriceTable = ({ electricityPrice }) => {
                         </thead>
                         <tbody>
                               {data.map(({ ee, lt, lv, fi }, index) => (
-                                    <tr key={index}>
-                                          <td className={index === rowIndex ? 'active-row' : ''}>
-                                                {moment.unix(ee.timestamp).format('DD.MM.YYYY HH:mm:ss')}
-                                          </td>
-                                          <td className={index === rowIndex ? 'active-row' : ''}>{ee.price}</td>
-                                          <td className={index === rowIndex ? 'active-row' : ''}>{fi.price}</td>
-                                          <td className={index === rowIndex ? 'active-row' : ''}>{lv.price}</td>
-                                          <td className={index === rowIndex ? 'active-row' : ''}>{lt.price}</td>
+                                    <tr key={index} className={index === rowIndex ? 'active-row' : ''}>
+                                          <td>{moment.unix(ee.timestamp).format('DD.MM.YYYY HH:mm:ss')}</td>
+                                          <td>{ee.price}</td>
+                                          <td>{fi.price}</td>
+                                          <td>{lv.price}</td>
+                                          <td>{lt.price}</td>
                                     </tr>
                               ))}
                         </tbody>
