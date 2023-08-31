@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { DAYS } from '../Body/constants'
 
-const Days = ({ setShowSideBar, selectedDay, setSelectedDay }) => {
+const Days = ({ setShowSideBar, selectedDay, setSelectedDay, activeEnergy }) => {
       // const handlerActive = (id) => {
       //       setSelectedDay(id)
       // }
@@ -12,25 +12,18 @@ const Days = ({ setShowSideBar, selectedDay, setSelectedDay }) => {
                         {DAYS.map(({ label, value }) => {
                               return (
                                     <Button
-                                          key={label}
+                                          key={value}
                                           className='mx-2'
                                           variant='outline-warning'
                                           onClick={() => setSelectedDay(value)}
-                                          active={
-                                                selectedDay === value
-                                                      ? true
-                                                      : false
-                                          }
+                                          active={selectedDay === value ? true : false}
                                     >
-                                          {label}
+                                          {value}
+                                          {label[activeEnergy]}
                                     </Button>
                               )
                         })}
-                        <Button
-                              className='mx-2'
-                              variant='outline-warning'
-                              onClick={() => setShowSideBar(true)}
-                        >
+                        <Button className='mx-2' variant='outline-warning' onClick={() => setShowSideBar(true)}>
                               Choose Date
                         </Button>
                   </Container>

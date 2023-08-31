@@ -8,9 +8,7 @@ import PriceTable from './PriceTable/PriceTable'
 import { getElectricityPrice, getGasPrice } from '../../services/apiServe'
 import './body.scss'
 
-const Body = ({ selectedDay }) => {
-      const [activeEnergy, setActiveEnergy] = useState(ELE)
-      const [activeChart, setActiveChart] = useState(true)
+const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, activeChart }) => {
       const [activePriceTable, setActivePriceTable] = useState(false)
       const [electricityPrice, setElectricityPrice] = useState(null)
       const [gasPrice, setGasPrice] = useState(null)
@@ -52,7 +50,9 @@ const Body = ({ selectedDay }) => {
             <>
                   <Header activeEnergy={activeEnergy} setActiveEnergy={setActiveEnergy} electricityPrice={electricityPrice} />
                   {activeChart && <Chart activeEnergy={activeEnergy} electricityPrice={electricityPrice} gasPrice={gasPrice} />}
-                  {activePriceTable && <PriceTable electricityPrice={electricityPrice} gasPrice={gasPrice} />}
+                  {activePriceTable && (
+                        <PriceTable electricityPrice={electricityPrice} gasPrice={gasPrice} activeEnergy={activeEnergy} />
+                  )}
 
                   <Button className='mx-2' variant='outline-info' onClick={() => handleChart()} active={activeChart}>
                         Chart

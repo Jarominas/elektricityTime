@@ -1,3 +1,7 @@
+:root {
+      --bs-blue: #428bca;
+}
+
 .chartContainer {
       margin-top: 2em;
       height: 500px;
@@ -24,7 +28,7 @@
 
 .active-row > td {
       box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      background-color: #428bca !important;
+      background-color: var(--bs-blue);
       font-weight: bold;
       font-size: 1.2em;
       animation-name: backgroundColorPalette;
