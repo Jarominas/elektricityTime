@@ -11,11 +11,9 @@ const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
             const prices = {
                   [ELE]: {
                         data: electricityPrice.ee,
-                        // format: 'DD',
                   },
                   [GAS]: {
                         data: estGasLatest.data,
-                        // format: 'HH',
                   },
             }
 
