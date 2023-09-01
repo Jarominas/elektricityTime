@@ -26,3 +26,8 @@ export async function getGasPrice(selectedDay) {
       const response = await fetch(`${apiUrl}/gas-trade?${params}`)
       return await response.json()
 }
+
+export async function getLatestEstGasPrice() {
+      const response = await fetch(`${apiUrl}/gas-trade/EE/latest`)
+      return await response.json()
+}

@@ -5,7 +5,7 @@ import Chart from './Chart/Chart'
 import ModalError from './ModalError/ModalError'
 import { ELE } from './constants'
 import PriceTable from './PriceTable/PriceTable'
-import { getElectricityPrice, getGasPrice } from '../../services/apiServe'
+import { getElectricityPrice, getGasPrice, getLatestEstGasPrice } from '../../services/apiServe'
 import './body.scss'
 
 const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, activeChart }) => {
@@ -13,8 +13,10 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
       const [electricityPrice, setElectricityPrice] = useState(null)
       const [gasPrice, setGasPrice] = useState(null)
       const [errorMessage, setErrorMessage] = useState(null)
+      const [estGasLatest, setEstGasLatest] = useState(null)
 
       useEffect(() => {
+            // ELECTRICITY PRICE
             getElectricityPrice(selectedDay)
                   .then((data) => {
                         console.log('electricity', data)
@@ -25,6 +27,7 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
                   })
                   .catch(setErrorMessage)
 
+            // GAS PRICE
             getGasPrice(selectedDay)
                   .then((data) => {
                         console.log('gas', data)
@@ -32,6 +35,14 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
                               throw new Error(data.messages)
                         }
                         setGasPrice(data.data)
+                  })
+                  .catch(setErrorMessage)
+
+            // ESTONIAN LATEST GAS PRICE
+            getLatestEstGasPrice()
+                  .then((data) => {
+                        console.log('estLatest', data)
+                        setEstGasLatest(data)
                   })
                   .catch(setErrorMessage)
       }, [selectedDay])
@@ -48,7 +59,12 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
       console.log('error message', errorMessage)
       return (
             <>
-                  <Header activeEnergy={activeEnergy} setActiveEnergy={setActiveEnergy} electricityPrice={electricityPrice} />
+                  <Header
+                        activeEnergy={activeEnergy}
+                        setActiveEnergy={setActiveEnergy}
+                        electricityPrice={electricityPrice}
+                        estGasLatest={estGasLatest}
+                  />
                   {activeChart && <Chart activeEnergy={activeEnergy} electricityPrice={electricityPrice} gasPrice={gasPrice} />}
                   {activePriceTable && (
                         <PriceTable electricityPrice={electricityPrice} gasPrice={gasPrice} activeEnergy={activeEnergy} />

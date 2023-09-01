@@ -5,11 +5,7 @@ import { ELE, NOW_TIMESTAMP, GAS } from '../constants'
 
 const Chart = ({ electricityPrice, activeEnergy, gasPrice }) => {
       const [chartData, setChartData] = useState([])
-      let energy = activeEnergy === ELE ? electricityPrice?.ee : gasPrice?.common
-      const data = energy?.map((price) => ({
-            ...price,
-            hour: moment.unix(price.timestamp).format('HH'),
-      }))
+
       useEffect(() => {
             if (!electricityPrice || !gasPrice) return
             const energy = {
@@ -26,6 +22,7 @@ const Chart = ({ electricityPrice, activeEnergy, gasPrice }) => {
                   ...data,
                   interval: moment.unix(data.timestamp).format(energy[activeEnergy].format),
             }))
+            // console.log('SUPER CHART DATA', data)
             setChartData(data)
       }, [electricityPrice, gasPrice, activeEnergy])
       return (
