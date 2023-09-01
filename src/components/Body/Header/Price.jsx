@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { NOW_TIMESTAMP, ELE, GAS } from '../constants'
-import moment from 'moment'
+import Spinner from 'react-bootstrap/Spinner'
 
 const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
-      const [currentPrice, setCurrentPrice] = useState(null)
+      const [currentGas, setCurrentGas] = useState(null)
+      const [currentElectricity, setCurrentElectricity] = useState(null)
 
       useEffect(() => {
             if (!electricityPrice || !estGasLatest) return
@@ -21,20 +22,24 @@ const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
                   ...dataItem,
             }))
 
-            setCurrentPrice(data)
+            if (activeEnergy === ELE) {
+                  setCurrentElectricity(data)
+            } else if (activeEnergy === GAS) {
+                  setCurrentGas(data)
+            }
+
             console.log('GAS OR ELE DATA', data)
       }, [electricityPrice, estGasLatest, activeEnergy])
       return (
             <>
-                  {currentPrice &&
-                        currentPrice.map((priceItem) => (
+                  {(activeEnergy === ELE ? currentElectricity : currentGas) &&
+                        (activeEnergy === ELE ? currentElectricity : currentGas).map((priceItem) => (
                               <div className='price' key={priceItem.timestamp}>
                                     {activeEnergy === ELE && NOW_TIMESTAMP === priceItem.timestamp
                                           ? priceItem.price
                                           : activeEnergy === GAS && priceItem.price}
                               </div>
                         ))}
-
                   <p>{activeEnergy === ELE ? 'sents/kw' : 'euro/MWh'}</p>
             </>
       )
