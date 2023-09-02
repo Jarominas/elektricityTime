@@ -6,6 +6,15 @@
       margin-top: 2em;
       height: 500px;
       margin-bottom: 1em;
+      & .chartSpinner {
+            display: block;
+            width: 100px;
+            height: 100px;
+            font-size: 2em;
+
+            margin: 0 auto;
+            margin-top: 5em;
+      }
 }
 .priceTable {
       display: flex;

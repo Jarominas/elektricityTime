@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Modal, Spinner } from 'react-bootstrap'
 import Header from './Header/Header'
 import Chart from './Chart/Chart'
 import ModalError from './ModalError/ModalError'
@@ -14,6 +14,7 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
       const [gasPrice, setGasPrice] = useState(null)
       const [errorMessage, setErrorMessage] = useState(null)
       const [estGasLatest, setEstGasLatest] = useState(null)
+      // const [isLoading, setIsLoading] = useState(true)
 
       useEffect(() => {
             // ELECTRICITY PRICE
@@ -24,6 +25,7 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
                               throw data.messages
                         }
                         setElectricityPrice(data.data)
+                        // setIsLoading(false)
                   })
                   .catch(setErrorMessage)
 
@@ -35,6 +37,7 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
                               throw new Error(data.messages)
                         }
                         setGasPrice(data.data)
+                        // setIsLoading(false)
                   })
                   .catch(setErrorMessage)
 
@@ -43,6 +46,7 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
                   .then((data) => {
                         console.log('estLatest', data)
                         setEstGasLatest(data)
+                        // setIsLoading(false)
                   })
                   .catch(setErrorMessage)
       }, [selectedDay])
@@ -69,14 +73,12 @@ const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, acti
                   {activePriceTable && (
                         <PriceTable electricityPrice={electricityPrice} gasPrice={gasPrice} activeEnergy={activeEnergy} />
                   )}
-
                   <Button className='mx-2' variant='outline-info' onClick={() => handleChart()} active={activeChart}>
                         Chart
                   </Button>
                   <Button variant='outline-info' onClick={() => handlePriceTable()} active={activePriceTable}>
                         Price Table
                   </Button>
-
                   <ModalError errorMessage={errorMessage} handleClose={() => setErrorMessage(null)} />
             </>
       )
