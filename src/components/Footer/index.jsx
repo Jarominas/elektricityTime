@@ -8,10 +8,7 @@ const Footer = (props) => {
       return (
             <>
                   <Days setShowSideBar={setShowSideBar} {...props} />
-                  <SideBar
-                        show={showSideBar}
-                        handleClose={() => setShowSideBar(false)}
-                  />
+                  <SideBar show={showSideBar} handleClose={() => setShowSideBar(false)} {...props} />
             </>
       )
 }

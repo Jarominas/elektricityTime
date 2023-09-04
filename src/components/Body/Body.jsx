@@ -8,48 +8,55 @@ import PriceTable from './PriceTable/PriceTable'
 import { getElectricityPrice, getGasPrice, getLatestEstGasPrice } from '../../services/apiServe'
 import './body.scss'
 
-const Body = ({ selectedDay, activeEnergy, setActiveEnergy, setActiveChart, activeChart }) => {
+const Body = ({
+      selectedDay,
+      activeEnergy,
+      setActiveEnergy,
+      setActiveChart,
+      activeChart,
+      electricityPrice,
+      setElectricityPrice,
+      gasPrice,
+      setGasPrice,
+      estGasLatest,
+      setEstGasLatest,
+}) => {
       const [activePriceTable, setActivePriceTable] = useState(false)
-      const [electricityPrice, setElectricityPrice] = useState(null)
-      const [gasPrice, setGasPrice] = useState(null)
       const [errorMessage, setErrorMessage] = useState(null)
-      const [estGasLatest, setEstGasLatest] = useState(null)
-      // const [isLoading, setIsLoading] = useState(true)
 
       useEffect(() => {
             // ELECTRICITY PRICE
-            getElectricityPrice(selectedDay)
+            getElectricityPrice({ selectedDay })
                   .then((data) => {
                         console.log('electricity', data)
                         if (!data.success) {
                               throw data.messages
                         }
                         setElectricityPrice(data.data)
-                        // setIsLoading(false)
                   })
                   .catch(setErrorMessage)
 
             // GAS PRICE
-            getGasPrice(selectedDay)
+            getGasPrice({ selectedDay })
                   .then((data) => {
                         console.log('gas', data)
                         if (!data.success) {
                               throw new Error(data.messages)
                         }
                         setGasPrice(data.data)
-                        // setIsLoading(false)
                   })
                   .catch(setErrorMessage)
+      }, [selectedDay, setGasPrice, setElectricityPrice])
 
-            // ESTONIAN LATEST GAS PRICE
+      // ESTONIAN LATEST GAS PRICE
+      useEffect(() => {
             getLatestEstGasPrice()
                   .then((data) => {
-                        console.log('estLatest', data)
                         setEstGasLatest(data)
-                        // setIsLoading(false)
+                        console.log('estLatest', data)
                   })
                   .catch(setErrorMessage)
-      }, [selectedDay])
+      }, [setEstGasLatest])
 
       const handleChart = () => {
             setActiveChart(true)

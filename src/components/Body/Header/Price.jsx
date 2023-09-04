@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { NOW_TIMESTAMP, ELE, GAS } from '../constants'
-import Spinner from 'react-bootstrap/Spinner'
 
 const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
       const [currentGas, setCurrentGas] = useState(null)
@@ -23,9 +22,9 @@ const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
             }))
 
             if (activeEnergy === ELE) {
-                  setCurrentElectricity(data)
+                  setCurrentElectricity(data || null)
             } else if (activeEnergy === GAS) {
-                  setCurrentGas(data)
+                  setCurrentGas(data || null)
             }
 
             console.log('GAS OR ELE DATA', data)
