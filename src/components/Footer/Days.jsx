@@ -15,8 +15,8 @@ const Days = ({ setShowSideBar, selectedDay, setSelectedDay, activeEnergy }) => 
                                           key={value}
                                           className='mx-2'
                                           variant='outline-warning'
+                                          active={selectedDay === value}
                                           onClick={() => setSelectedDay(value)}
-                                          active={selectedDay === value ? true : false}
                                     >
                                           {value}
                                           {label[activeEnergy]}

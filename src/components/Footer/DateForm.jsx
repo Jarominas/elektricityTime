@@ -25,8 +25,8 @@ function DateForm({ setElectricityPrice, setGasPrice, setEstGasLatest, hideSideB
                   if (!dataLatest.success) {
                         throw dataLatest.messages
                   }
-                  setEstGasLatest(dataLatest.data)
-                  console.log('from DATA FORM', dataLatest.data)
+                  setEstGasLatest(dataLatest.data[0].price)
+                  console.log('from DATA FORM', dataLatest.data[0].price)
             } catch (error) {
                   console.log(error)
                   // setErrorMessage(error)

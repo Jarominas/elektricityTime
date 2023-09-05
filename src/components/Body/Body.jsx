@@ -52,7 +52,7 @@ const Body = ({
       useEffect(() => {
             getLatestEstGasPrice()
                   .then((data) => {
-                        setEstGasLatest(data)
+                        setEstGasLatest(data.data[0].price)
                         console.log('estLatest', data)
                   })
                   .catch(setErrorMessage)
@@ -67,7 +67,6 @@ const Body = ({
             setActivePriceTable(true)
             setActiveChart(false)
       }
-      console.log('error message', errorMessage)
       return (
             <>
                   <Header
