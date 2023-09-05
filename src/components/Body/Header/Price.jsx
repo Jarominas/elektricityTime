@@ -7,11 +7,10 @@ const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
 
       useEffect(() => {
             if (!electricityPrice) return
-
             const data = electricityPrice.ee.find((item) => item.timestamp === NOW_TIMESTAMP)
             setCurrentPrice(data?.price || 0)
-            // setCurrentPrice(data.price || null)
       }, [electricityPrice, activeEnergy, estGasLatest])
+      console.log('GET CURRENT ELE PRICE', currentPrice)
       return (
             <>
                   <h2>{activeEnergy === ELE ? currentPrice : parseFloat(estGasLatest).toFixed(2)}</h2>
