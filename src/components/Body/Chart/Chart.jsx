@@ -2,11 +2,16 @@ import { useState, useEffect } from 'react'
 import { LineChart, ReferenceLine, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import moment from 'moment'
 import { ELE, NOW_TIMESTAMP, GAS } from '../constants'
+import { useSelector } from 'react-redux'
 import { Spinner } from 'react-bootstrap'
 
-const Chart = ({ electricityPrice, activeEnergy, gasPrice }) => {
+const Chart = () => {
+      const electricityPrice = useSelector((state) => state.electricityPrice)
+      const gasPrice = useSelector((state) => state.gasPrice)
+      const activeEnergy = useSelector((state) => state.activeEnergy)
       const [chartData, setChartData] = useState([])
       const [isLoading, setIsLoading] = useState(true)
+
       useEffect(() => {
             if (!electricityPrice || !gasPrice) return
             const energy = {

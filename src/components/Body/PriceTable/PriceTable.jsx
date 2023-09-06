@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { NOW_TIMESTAMP, GAS, ELE } from '../constants'
 
-const PriceTable = ({ electricityPrice, gasPrice, activeEnergy }) => {
+const PriceTable = () => {
+      const electricityPrice = useSelector((state) => state.electricityPrice)
+      const gasPrice = useSelector((state) => state.gasPrice)
+      const activeEnergy = useSelector((state) => state.activeEnergy)
       const [tableData, setTableData] = useState([])
-      // const data = electricityPrice?.ee.map((priceEE, index) => {
-      //       return {
-      //             ee: priceEE,
-      //             lv: electricityPrice?.lv[index],
-      //             fi: electricityPrice?.fi[index],
-      //             lt: electricityPrice?.lt[index],
-      //       }
-      // })
+
       useEffect(() => {
-            if (!electricityPrice || !gasPrice) return
+            if (!electricityPrice || !gasPrice) {
+                  console.log('No data in PriceTable')
+                  return
+            }
             const energy = {
                   [ELE]: {
                         data: electricityPrice,

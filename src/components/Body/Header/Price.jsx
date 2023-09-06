@@ -1,14 +1,21 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 import { NOW_TIMESTAMP, ELE } from '../constants'
+import { useSelector } from 'react-redux'
+const Price = () => {
+      const electricityPrice = useSelector((state) => state.electricityPrice)
+      const estGasLatest = useSelector((state) => state.estGasLatest)
+      const activeEnergy = useSelector((state) => state.activeEnergy)
 
-const Price = ({ electricityPrice, activeEnergy, estGasLatest }) => {
-      const [currentPrice, setCurrentPrice] = useState(0)
+      const [currentPrice, setCurrentPrice] = useState(null)
 
       useEffect(() => {
-            if (!electricityPrice) return
+            if (!electricityPrice) {
+                  console.log('No data in Price')
+                  return
+            }
             const data = electricityPrice.ee.find((item) => item.timestamp === NOW_TIMESTAMP)
-            setCurrentPrice(data?.price || 0)
+            setCurrentPrice(data?.price || null)
       }, [electricityPrice, activeEnergy, estGasLatest])
       console.log('GET CURRENT ELE PRICE', currentPrice)
       return (

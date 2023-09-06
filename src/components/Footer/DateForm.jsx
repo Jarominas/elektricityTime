@@ -2,9 +2,12 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ModalError from '../Body/ModalError/ModalError'
-import { getElectricityPrice, getGasPrice, getLatestEstGasPrice } from '../../services/apiServe'
+import { getGasPrice, getLatestEstGasPrice, getElectricityPrice } from '../../services/apiServe'
+import { setElectricityPrice, setGasPrice, setEstGasLatest } from '../../services/stateService'
+import { useDispatch } from 'react-redux'
 
-function DateForm({ setElectricityPrice, setGasPrice, setEstGasLatest, hideSideBar }) {
+function DateForm({ hideSideBar }) {
+      const dispatch = useDispatch()
       const [errorMessage, setErrorMessage] = useState(null)
       const handleSubmit = async (event) => {
             event.preventDefault()
@@ -18,14 +21,14 @@ function DateForm({ setElectricityPrice, setGasPrice, setEstGasLatest, hideSideB
                   if (![dataEle, dataGas].find((data) => data.success)) {
                         throw (dataEle || dataGas).messages[0]
                   }
-                  setElectricityPrice(dataEle.data)
-                  setGasPrice(dataGas.data)
+                  dispatch(setElectricityPrice(dataEle.data))
+                  dispatch(setGasPrice(dataGas.data))
 
                   const dataLatest = await getLatestEstGasPrice({ to, from })
                   if (!dataLatest.success) {
                         throw dataLatest.messages
                   }
-                  setEstGasLatest(dataLatest.data[0].price)
+                  dispatch(setEstGasLatest(dataLatest.data[0].price))
                   console.log('from DATA FORM', dataLatest.data[0].price)
             } catch (error) {
                   console.log(error)
