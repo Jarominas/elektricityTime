@@ -8,6 +8,7 @@ const initialState = {
       estGasLatest: null,
       activeEnergy: ELE,
       selectedDay: DAYS[0].value,
+      errorMessage: null,
 }
 
 export const setElectricityPrice = createAction('setElectricityPrice')
@@ -16,6 +17,7 @@ export const setActiveChart = createAction('setActiveChart')
 export const setEstGasLatest = createAction('setEstGasLatest')
 export const setActiveEnergy = createAction('setActiveEnergy')
 export const setSelectedDay = createAction('setSelectedDay')
+export const setErrorMessage = createAction('setErrorMessage')
 
 const reducer = createReducer(initialState, (builder) => {
       builder
@@ -37,6 +39,9 @@ const reducer = createReducer(initialState, (builder) => {
             })
             .addCase(setSelectedDay, (state, action) => {
                   state.selectedDay = action.payload
+            })
+            .addCase(setErrorMessage, (state, action) => {
+                  state.errorMessage = action.payload
             })
 })
 

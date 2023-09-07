@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Button, Modal, Spinner } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import Header from './Header/Header'
 import Chart from './Chart/Chart'
-import ModalError from './ModalError/ModalError'
 import { useSelector } from 'react-redux'
 import { ELE } from './constants'
 import PriceTable from './PriceTable/PriceTable'
 import { getElectricityPrice, getGasPrice, getLatestEstGasPrice } from '../../services/apiServe'
-import { setElectricityPrice, setGasPrice, setActiveChart, setEstGasLatest } from '../../services/stateService'
+import { setElectricityPrice, setGasPrice, setActiveChart, setEstGasLatest, setErrorMessage } from '../../services/stateService'
 import { useDispatch } from 'react-redux'
 import './body.scss'
 
@@ -17,7 +16,6 @@ const Body = () => {
       const dispatch = useDispatch()
 
       const [activePriceTable, setActivePriceTable] = useState(false)
-      const [errorMessage, setErrorMessage] = useState(null)
 
       useEffect(() => {
             // ELECTRICITY PRICE
@@ -29,7 +27,7 @@ const Body = () => {
                         }
                         dispatch(setElectricityPrice(data.data))
                   })
-                  .catch(setErrorMessage)
+                  .catch((error) => dispatch(setErrorMessage(error)))
 
             // GAS PRICE
             getGasPrice({ selectedDay })
@@ -40,7 +38,7 @@ const Body = () => {
                         }
                         dispatch(setGasPrice(data.data))
                   })
-                  .catch(setErrorMessage)
+                  .catch((error) => dispatch(setErrorMessage(error)))
       }, [selectedDay, setGasPrice, dispatch])
 
       // ESTONIAN LATEST GAS PRICE
@@ -50,7 +48,7 @@ const Body = () => {
                         dispatch(setEstGasLatest(data.data[0].price))
                         console.log('estLatest', data)
                   })
-                  .catch(setErrorMessage)
+                  .catch((error) => dispatch(setErrorMessage(error)))
       }, [setEstGasLatest])
 
       const handleChart = () => {
@@ -73,7 +71,6 @@ const Body = () => {
                   <Button variant='outline-info' onClick={() => handlePriceTable()} active={activePriceTable}>
                         Price Table
                   </Button>
-                  <ModalError errorMessage={errorMessage} handleClose={() => setErrorMessage(null)} />
             </>
       )
 }

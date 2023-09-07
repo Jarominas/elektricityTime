@@ -1,14 +1,11 @@
-import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import ModalError from '../Body/ModalError/ModalError'
 import { getGasPrice, getLatestEstGasPrice, getElectricityPrice } from '../../services/apiServe'
-import { setElectricityPrice, setGasPrice, setEstGasLatest } from '../../services/stateService'
+import { setElectricityPrice, setGasPrice, setEstGasLatest, setErrorMessage } from '../../services/stateService'
 import { useDispatch } from 'react-redux'
 
 function DateForm({ hideSideBar }) {
       const dispatch = useDispatch()
-      const [errorMessage, setErrorMessage] = useState(null)
       const handleSubmit = async (event) => {
             event.preventDefault()
 
@@ -32,11 +29,12 @@ function DateForm({ hideSideBar }) {
                   console.log('from DATA FORM', dataLatest.data[0].price)
             } catch (error) {
                   console.log(error)
-                  // setErrorMessage(error)
+                  dispatch(setErrorMessage(error))
+            } finally {
+                  hideSideBar()
             }
 
             console.log(from, to)
-            hideSideBar()
       }
 
       return (
@@ -44,7 +42,7 @@ function DateForm({ hideSideBar }) {
                   <Form onSubmit={handleSubmit}>
                         <Form.Group className='mb-3' controlId='formBasicEmail'>
                               <Form.Label>From</Form.Label>
-                              <Form.Control type='date' name='from' />
+                              <Form.Control type='date' name='from' required />
                         </Form.Group>
 
                         <Form.Group className='mb-3' controlId='formBasicPassword'>
@@ -55,7 +53,6 @@ function DateForm({ hideSideBar }) {
                               Search
                         </Button>
                   </Form>
-                  <ModalError errorMessage={errorMessage} handleClose={() => setErrorMessage(null)} />
             </>
       )
 }

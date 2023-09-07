@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import Navigation from './components/Navigation/Navigation'
 import Body from './components/Body/Body'
 import Footer from './components/Footer'
+import ModalError from './ModalError'
 
 function App() {
       return (
@@ -11,6 +12,7 @@ function App() {
                         <Navigation />
                         <Body />
                         <Footer />
+                        <ModalError />
                   </Container>
             </>
       )
