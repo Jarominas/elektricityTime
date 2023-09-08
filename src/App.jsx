@@ -7,6 +7,8 @@ import ModalError from './ModalError'
 import { Routes, Route } from 'react-router-dom'
 import Contact from './components/Contacts'
 import useGetData from './components/effects/useGetData'
+import PricePage from './components/PricePage/PricePage'
+import TaxPricePage from './components/PricePage/TaxPricePage'
 function App() {
       useGetData()
 
@@ -26,6 +28,8 @@ function App() {
                               <Route path='/gas/:dataType' element={mainPage} />
                               <Route path='/electricity' element={mainPage} />
                               <Route path='/contacts' element={<Contact />} />
+                              <Route path='/pricepage' element={<PricePage />} />
+                              <Route path='/pricepage/km' element={<TaxPricePage />} />
                         </Routes>
                         <ModalError />
                   </Container>

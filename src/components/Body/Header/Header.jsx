@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col'
 import PriceInfo from './PriceInfo'
 import Switcher from './Switcher'
 import Price from './Price'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
       return (
@@ -16,7 +17,9 @@ const Header = (props) => {
                               <Switcher {...props} />
                         </Col>
                         <Col className='d-flex flex-column align-items-end'>
-                              <Price {...props} />
+                              <Link to={'/pricepage'} className=''>
+                                    <Price {...props} />
+                              </Link>
                         </Col>
                   </Row>
             </Container>

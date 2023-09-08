@@ -1,7 +1,10 @@
 :root {
       --bs-blue: #428bca;
 }
-
+a {
+      color: black;
+      text-decoration: none;
+}
 .chartContainer {
       margin-top: 2em;
       height: 500px;
