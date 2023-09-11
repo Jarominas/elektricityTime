@@ -4,6 +4,13 @@ import { getGasPrice, getLatestEstGasPrice, getElectricityPrice } from '../../se
 import { setElectricityPrice, setGasPrice, setEstGasLatest, setErrorMessage } from '../../services/stateService'
 import { useDispatch } from 'react-redux'
 
+// Components take one argument . This is property object
+// Property or props is an object that keep all info that we send to component.
+// Ex: <Component props1={1} props={2}
+// Inside component you can't change props.
+// Props can be all kinds of data that can be in NodeJs.  (number, string etc.)
+// There is one name of property that can't be used. Children. All elements inside component writed in to it
+
 function DateForm({ hideSideBar }) {
       const dispatch = useDispatch()
       const handleSubmit = async (event) => {
