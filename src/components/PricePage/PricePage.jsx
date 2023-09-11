@@ -10,6 +10,14 @@ const PricePage = () => {
       const [currentElectricity, setCurrentElectricity] = useState(null)
 
       console.log(electricityPrice)
+
+      // useEffect is a hook that starts after component ends his render.
+      // It takes two arguments :
+      // 1.Function that must be started
+      // 2.Array of dependencys
+      // Use effect controls this dependecys and when they changes restart function.
+      // useEffect we use to recive data inside component to have control of that data to remove rerenders.
+
       useEffect(() => {
             if (!electricityPrice) {
                   return
