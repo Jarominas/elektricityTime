@@ -21,7 +21,7 @@ const PricePage = ({ km }) => {
             <section className='d-flex flex-column justify-content-center m-3 gap-5 vh-100 align-items-center'>
                   <div className='d-flex gap-5'>
                         <div>
-                              <h5>Elektricity price</h5>
+                              <h5>Elektricity price Test</h5>
                               <h2>{km ? parseFloat(currentElectricity * 1.2).toFixed(2) : currentElectricity}</h2>
                               <p>sents/kw</p>
                         </div>
