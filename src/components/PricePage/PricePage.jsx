@@ -4,7 +4,7 @@ import { NOW_TIMESTAMP } from '../Body/constants'
 import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
-const PricePage = () => {
+const PricePage = ({ km }) => {
       const electricityPrice = useSelector((state) => state.electricityPrice)
       const estGasLatest = useSelector((state) => state.estGasLatest)
       const [currentElectricity, setCurrentElectricity] = useState(null)
@@ -22,12 +22,12 @@ const PricePage = () => {
                   <div className='d-flex gap-5'>
                         <div>
                               <h5>Elektricity price</h5>
-                              <h2>{currentElectricity}</h2>
+                              <h2>{km ? currentElectricity * 1.2 : currentElectricity}</h2>
                               <p>sents/kw</p>
                         </div>
                         <div>
                               <h5>Gas price</h5>
-                              <h2>{parseFloat(estGasLatest).toFixed(2)}</h2>
+                              <h2>{km ? parseFloat(estGasLatest * 1.2).toFixed(2) : parseFloat(estGasLatest).toFixed(2)}</h2>
                               <p>euro/MWh</p>
                         </div>
                   </div>
@@ -35,8 +35,8 @@ const PricePage = () => {
                         <Link to={'/'}>
                               <Button>Back to Home</Button>
                         </Link>
-                        <Link to={'/pricepage/km'}>
-                              <Button>Add Tax 20%</Button>
+                        <Link to={km ? '/pricepage' : '/pricepage/km'}>
+                              {km ? <Button>Remove Taxis</Button> : <Button>Add Taxis</Button>}
                         </Link>
                   </div>
             </section>

@@ -29,7 +29,7 @@ function App() {
                               <Route path='/electricity' element={mainPage} />
                               <Route path='/contacts' element={<Contact />} />
                               <Route path='/pricepage' element={<PricePage />} />
-                              <Route path='/pricepage/km' element={<TaxPricePage />} />
+                              <Route path='/pricepage/km' element={<PricePage km />} />
                         </Routes>
                         <ModalError />
                   </Container>
