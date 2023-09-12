@@ -1,4 +1,4 @@
-import './app.scss'
+import './App.scss'
 import { Container } from 'react-bootstrap'
 import Navigation from './components/Navigation/Navigation'
 import Body from './components/Body/Body'
