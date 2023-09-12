@@ -8,7 +8,6 @@ import { Routes, Route } from 'react-router-dom'
 import Contact from './components/Contacts'
 import useGetData from './components/effects/useGetData'
 import PricePage from './components/PricePage/PricePage'
-import TaxPricePage from './components/PricePage/TaxPricePage'
 function App() {
       useGetData()
 
