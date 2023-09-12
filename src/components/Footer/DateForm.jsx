@@ -14,7 +14,6 @@ function DateForm({ hideSideBar }) {
 
             try {
                   const [dataEle, dataGas] = await Promise.all([getElectricityPrice({ to, from }), getGasPrice({ to, from })])
-                  console.log('NEW DATA', dataEle, dataGas)
                   if (![dataEle, dataGas].find((data) => data.success)) {
                         throw (dataEle || dataGas).messages[0]
                   }
@@ -26,7 +25,6 @@ function DateForm({ hideSideBar }) {
                         throw dataLatest.messages
                   }
                   dispatch(setEstGasLatest(dataLatest.data[0].price))
-                  console.log('from DATA FORM', dataLatest.data[0].price)
             } catch (error) {
                   console.log(error)
                   dispatch(setErrorMessage(error))

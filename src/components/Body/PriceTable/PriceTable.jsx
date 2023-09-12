@@ -13,7 +13,6 @@ const PriceTable = () => {
 
       useEffect(() => {
             if (!electricityPrice || !gasPrice) {
-                  console.log('No data in PriceTable')
                   return
             }
             const energy = {

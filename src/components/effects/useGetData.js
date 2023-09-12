@@ -10,7 +10,6 @@ const useGetData = () => {
             // ELECTRICITY PRICE
             getElectricityPrice({ selectedDay })
                   .then((data) => {
-                        console.log('electricity', data)
                         if (!data.success) {
                               throw data.messages
                         }
@@ -21,7 +20,6 @@ const useGetData = () => {
             // GAS PRICE
             getGasPrice({ selectedDay })
                   .then((data) => {
-                        console.log('gas', data)
                         if (!data.success) {
                               throw new Error(data.messages)
                         }
@@ -35,7 +33,6 @@ const useGetData = () => {
             getLatestEstGasPrice()
                   .then((data) => {
                         dispatch(setEstGasLatest(data.data[0].price))
-                        console.log('estLatest', data)
                   })
                   .catch((error) => dispatch(setErrorMessage(error)))
       }, [setEstGasLatest])
