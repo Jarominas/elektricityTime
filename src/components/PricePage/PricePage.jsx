@@ -22,7 +22,7 @@ const PricePage = ({ km }) => {
                   <div className='d-flex gap-5'>
                         <div>
                               <h5>Elektricity price</h5>
-                              <h2>{km ? currentElectricity * 1.2 : currentElectricity}</h2>
+                              <h2>{km ? parseFloat(currentElectricity * 1.2).toFixed(2) : currentElectricity}</h2>
                               <p>sents/kw</p>
                         </div>
                         <div>
