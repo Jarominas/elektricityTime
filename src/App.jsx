@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom'
 import Contact from './components/Contacts'
 import useGetData from './components/effects/useGetData'
 import PricePage from './components/PricePage/PricePage'
+import PriceTable from './components/Body/PriceTable/PriceTable'
 function App() {
       useGetData()
 
@@ -23,6 +24,7 @@ function App() {
                         <Navigation />
                         <Routes>
                               <Route path='/' element={mainPage} />
+                              <Route path='/table' element={<PriceTable />} />
                               <Route path='/gas' element={mainPage} />
                               <Route path='/gas/:dataType' element={mainPage} />
                               <Route path='/electricity' element={mainPage} />

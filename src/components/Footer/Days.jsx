@@ -15,7 +15,7 @@ const Days = ({ setShowSideBar }) => {
                               return (
                                     <Button
                                           key={value}
-                                          className='mx-2'
+                                          className='mx-1'
                                           variant='outline-warning'
                                           active={selectedDay === value}
                                           onClick={() => dispatch(setSelectedDay(value))}
@@ -25,7 +25,7 @@ const Days = ({ setShowSideBar }) => {
                                     </Button>
                               )
                         })}
-                        <Button className='mx-2' variant='outline-warning' onClick={() => setShowSideBar(true)}>
+                        <Button className='mx-1' variant='outline-warning' onClick={() => setShowSideBar(true)}>
                               Choose Date
                         </Button>
                   </Container>

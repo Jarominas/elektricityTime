@@ -9,7 +9,6 @@ const PricePage = ({ km }) => {
       const estGasLatest = useSelector((state) => state.estGasLatest)
       const [currentElectricity, setCurrentElectricity] = useState(null)
 
-      console.log(electricityPrice)
       useEffect(() => {
             if (!electricityPrice) {
                   return

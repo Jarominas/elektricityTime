@@ -22,7 +22,7 @@ const Switcher = () => {
       return (
             <div>
                   {' '}
-                  <ButtonGroup>
+                  <ButtonGroup className='gap-2 p-2 bg-body-tertiary'>
                         <Button
                               className='text-capitalize'
                               variant='outline-secondary'

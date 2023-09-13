@@ -26,13 +26,10 @@ function DateForm({ hideSideBar }) {
                   }
                   dispatch(setEstGasLatest(dataLatest.data[0].price))
             } catch (error) {
-                  console.log(error)
                   dispatch(setErrorMessage(error))
             } finally {
                   hideSideBar()
             }
-
-            console.log(from, to)
       }
 
       return (

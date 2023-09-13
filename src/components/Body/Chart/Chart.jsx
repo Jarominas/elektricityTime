@@ -1,5 +1,16 @@
 import { useState, useEffect } from 'react'
-import { LineChart, ReferenceLine, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import {
+      LineChart,
+      ReferenceLine,
+      Line,
+      XAxis,
+      YAxis,
+      CartesianGrid,
+      Tooltip,
+      Legend,
+      ResponsiveContainer,
+      ReferenceDot,
+} from 'recharts'
 import moment from 'moment'
 import { ELE, NOW_TIMESTAMP, GAS } from '../constants'
 import { useSelector } from 'react-redux'
@@ -31,6 +42,7 @@ const Chart = () => {
             setChartData(data)
             setIsLoading(false)
       }, [electricityPrice, gasPrice, activeEnergy])
+      const nowDataPoint = chartData.find(({ timestamp }) => timestamp === NOW_TIMESTAMP)
       return (
             <div className='chartContainer'>
                   {isLoading ? (
@@ -49,12 +61,22 @@ const Chart = () => {
                                     <CartesianGrid strokeDasharray='3 3' />
                                     <XAxis dataKey='interval' />
                                     <YAxis />
-                                    <Tooltip />
+                                    <Tooltip cursor={{ stroke: '#ECF3F4', strokeWidth: 30 }} />
                                     <Legend />
-                                    <Line type='monotone' dataKey='price' stroke='#8884d8' activeDot={{ r: 8 }} />
-                                    <ReferenceLine
-                                          x={chartData?.findIndex(({ timestamp }) => timestamp === NOW_TIMESTAMP)}
-                                          stroke={'red'}
+                                    <Line
+                                          type='step'
+                                          dataKey='price'
+                                          stroke='#8884d8'
+                                          activeDot={{ stroke: '#20A4F3', strokeWidth: 3, r: 10 }}
+                                          strokeWidth={3}
+                                          legendType={'circle'}
+                                    />
+                                    <ReferenceDot
+                                          x={nowDataPoint?.interval}
+                                          y={nowDataPoint?.price}
+                                          r={12}
+                                          stroke='#20A4F3'
+                                          fill='#e15151'
                                     />
                               </LineChart>
                         </ResponsiveContainer>

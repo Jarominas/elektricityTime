@@ -9,11 +9,7 @@ const PriceInfo = () => {
                   <div>
                         <h2>Price is:</h2>
                         <div className='priceBadge'>
-                              {currentPrice?.price < NOW_TIMESTAMP ? (
-                                    <Badge bg='success'>Low</Badge>
-                              ) : (
-                                    <Badge bg='danger'>High</Badge>
-                              )}
+                              {currentPrice?.price < 100 ? <Badge bg='success'>Low</Badge> : <Badge bg='danger'>High</Badge>}
                         </div>
                   </div>
             </>
