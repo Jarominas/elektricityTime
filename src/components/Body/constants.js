@@ -8,8 +8,8 @@ export const NOW_TIMESTAMP = moment().startOf('hour').unix()
 export const LOW_ELE_PRICE = 120
 
 export const label = {
-      [ELE]: 'days',
-      [GAS]: 'month',
+      [ELE]: ' day',
+      [GAS]: ' month',
 }
 
 export const DAYS = [

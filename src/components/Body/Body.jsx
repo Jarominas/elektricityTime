@@ -6,19 +6,23 @@ import { useSelector } from 'react-redux'
 import { ELE } from './constants'
 import PriceTable from './PriceTable/PriceTable'
 import { useDispatch } from 'react-redux'
+import { setActiveChart } from '../../services/stateService'
 import './body.scss'
 
 const Body = () => {
       const activeChart = useSelector((state) => state.activeChart)
+      const dispatch = useDispatch()
 
       const [activePriceTable, setActivePriceTable] = useState(false)
 
       const handleChart = () => {
+            dispatch(setActiveChart(true))
             setActivePriceTable(false)
       }
 
       const handlePriceTable = () => {
             setActivePriceTable(true)
+            dispatch(setActiveChart(false))
       }
       return (
             <>

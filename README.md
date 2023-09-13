@@ -4,6 +4,8 @@
 
 https://jarominas-elektricitytime.netlify.app/
 
+![electrikell clone](./src/githubimage.png)
+
 ## Build With
 
 - React JS
