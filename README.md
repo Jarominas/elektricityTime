@@ -28,14 +28,38 @@ After the dependencies have been installed, run the command
  npm run dev
 ```
 
+## App Components
+
+Electricity and Gas switcher to choose what information you need
+
+<img src="./src/images/switcher.png" width="150" height="">
+
+---
+
+Badge green or red depending on the price
+
+<img src="./src/images/badge.png" width="150" height="">
+
+---
+
+Table and Chart Switcher to see info on chart or in table
+
+<img src="./src/images/tableswitch.png" width="150" height="">
+
+---
+
+Click on price in the Header to see page with price and tax prices
+
+<img src="./src/images/price.png" width="150" height="">
+
+---
+
 ## Build With
 
 - React JS
 - Redux Toolkit
 - Bootstrap
 - Rechart
-
-##
 
 ## API From
 
