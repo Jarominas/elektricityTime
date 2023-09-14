@@ -3,7 +3,7 @@ import moment from 'moment'
 const apiUrl = 'https://dashboard.elering.ee/api'
 
 export async function getElectricityPrice({ to, selectedDay, from }) {
-      const momentStart = selectedDay ? moment().subtract('10', 'hours') : moment(from).startOf('day')
+      const momentStart = selectedDay ? moment().subtract('3', 'hours') : moment(from).startOf('day')
       const momentEnd = selectedDay ? moment().add(selectedDay, 'days') : moment(to).endOf('day')
 
       const start = momentStart.toISOString(true)
