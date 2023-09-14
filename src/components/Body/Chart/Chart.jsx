@@ -37,7 +37,7 @@ const Chart = () => {
             }
             const data = energy[activeEnergy].data.map((data) => ({
                   ...data,
-                  interval: moment.unix(data.timestamp).format(energy[activeEnergy].format),
+                  interval: parseInt(moment.unix(data.timestamp).format(energy[activeEnergy].format)),
             }))
             setChartData(data)
             setIsLoading(false)
@@ -71,12 +71,11 @@ const Chart = () => {
                                           strokeWidth={3}
                                           legendType={'circle'}
                                     />
-                                    <ReferenceDot
-                                          x={nowDataPoint?.interval}
-                                          y={nowDataPoint?.price}
-                                          r={12}
-                                          stroke='#20A4F3'
-                                          fill='#e15151'
+                                    <ReferenceLine
+                                          x={chartData?.findIndex(({ timestamp }) => timestamp === NOW_TIMESTAMP)}
+                                          stroke={'red'}
+                                          strokeWidth={3}
+                                          activeDot={2}
                                     />
                               </LineChart>
                         </ResponsiveContainer>
